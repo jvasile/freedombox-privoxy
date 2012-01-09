@@ -92,7 +92,7 @@ def translate_ruleset(xml):
             print t.encode("UTF-8")
         print
 
-def main(ruledir=ruledir):
+def main(rule_dir=rule_dir):
     for fname in os.listdir(rule_dir):
         if fname.endswith('.xml'):
             with open(os.path.join(rule_dir, fname), 'r') as INF:
