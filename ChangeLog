@@ -1,0 +1,17 @@
+  2012-01-09 James Vasile <james@hackervisions.org>
+
+ * config: listen to the world.  Can you hear me now?
+
+ * .gitignore: ignore https-everywhere dir
+
+ * https_everywhere_import.py: typo
+
+ * config: add in custom filters for freedombox ssl and privacy
+
+ * Makefile: add makefile
+
+  2012-01-05 James Vasile <james@hackervisions.org>
+
+ * https_everywhere_import.py: import scripts should be executable
+
+ * config: config to use our actions and filters
