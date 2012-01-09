@@ -3,6 +3,7 @@ easylist.txt
 easyprivacy.action
 easyprivacy.txt
 https_everywhere.action
+vendor/https-everywhere
 *~
 \#*
 .\#*
