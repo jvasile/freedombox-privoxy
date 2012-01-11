@@ -1,0 +1,30 @@
+Source: freedombox-privoxy
+Section: web
+Priority: optional
+Maintainer: James Vasile <james@jamesvasile.com>
+Build-Depends: debhelper (>= 5.0.0), autoconf, autotools-dev, libpcre3-dev,
+ jade, docbook-dsssl, docbook, w3m, sp, sgmlspl, groff, man2html, dpatch,
+ zlib1g-dev
+Standards-Version: 3.9.2
+Homepage: http://www.privoxy.org/
+
+Package: freedombox-privoxy
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${perl:Depends}, logrotate,
+ adduser, lsb-base (>= 3.2-13)
+Recommends: doc-base
+Replaces: privoxy
+Description: Privacy enhancing HTTP Proxy
+ This package is based on Privoxy.  Its config has been adjusted to
+ add additional filtering for privacy-related web trackers and to
+ prefer ssl where possible.
+ .
+ Privoxy is a web proxy with advanced filtering capabilities for
+ protecting privacy, filtering web page content, managing cookies,
+ controlling access, and removing ads, banners, pop-ups and other
+ obnoxious Internet junk. Privoxy has a very flexible configuration
+ and can be customized to suit individual needs and tastes. Privoxy
+ has application for both stand-alone systems and multi-user networks.
+ .
+ Privoxy is based on Internet Junkbuster (tm).
+
