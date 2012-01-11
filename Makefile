@@ -1,4 +1,7 @@
 INSTALL_DIR=/etc/privoxy
+VERSION=`cat VERSION`
+PACKAGE_NAME=freedombox-privoxy
+DEBDIR=`ls -d Debian/privoxy*| xargs | sed "s/ .*//"`
 
 all: easyprivacy.action easylist.action https_everywhere.action
 
@@ -18,9 +21,9 @@ https_everywhere.action: vendor/https-everywhere
 	@./https_everywhere_import.py > https_everywhere.action
 
 
+deb: debian
 debian:
-	@mkdir -p Debian/$(INSTALL_DIR)
-	@echo Debian!
+	./make_deb.sh
 
 install: all
 	mkdir -p $(INSTALL_DIR)
@@ -28,4 +31,4 @@ install: all
 	/etc/init.d/privoxy restart
 
 clean:
-	@rm -rf easyprivacy.action easyprivacy.list https_everywhere.action vendor/https-everywhere
+	@rm -rf easyprivacy.action easyprivacy.txt https_everywhere.action vendor/https-everywhere 1000_config.dpatch Debian/privoxy* Debian/freedombox-privoxy* easylist.action easylist.txt
