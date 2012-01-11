@@ -17,7 +17,8 @@ Replaces: privoxy
 Description: Privacy enhancing HTTP Proxy
  This package is based on Privoxy.  Its config has been adjusted to
  add additional filtering for privacy-related web trackers and to
- prefer ssl where possible.
+ prefer ssl where possible.  Specifically, it pulls in the easyprivacy 
+ and https-everywhere lists.
  .
  If you are not running a FreedomBox, take some care with this package.  
  It is geared toward the FreedomBox environment.  In particular, it 
