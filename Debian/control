@@ -19,6 +19,11 @@ Description: Privacy enhancing HTTP Proxy
  add additional filtering for privacy-related web trackers and to
  prefer ssl where possible.
  .
+ If you are not running a FreedomBox, take some care with this package.  
+ It is geared toward the FreedomBox environment.  In particular, it 
+ listens on all interfaces and assumes you are protecting yourself via 
+ iptables or some upstream firewall.
+ .
  Privoxy is a web proxy with advanced filtering capabilities for
  protecting privacy, filtering web page content, managing cookies,
  controlling access, and removing ads, banners, pop-ups and other
@@ -27,4 +32,3 @@ Description: Privacy enhancing HTTP Proxy
  has application for both stand-alone systems and multi-user networks.
  .
  Privoxy is based on Internet Junkbuster (tm).
-
