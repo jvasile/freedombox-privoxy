@@ -20,14 +20,31 @@ cd ../..
 DEBDIR=`ls -d Debian/freedombox-privoxy*| xargs | sed "s/ .*//"`
 
 ## Add config file as patch
-sed -i -e's/1000_config.dpatch//' ${DEBDIR}/debian/patches/00list
-echo "#! /bin/sh /usr/share/dpatch/dpatch-run" > 1000_config.dpatch
-echo "## 1000_config.dpatch by James Vasile <james@jamesvasile.com>" >> 1000_config.dpatch
+sed -i -e's/90_config.dpatch//' ${DEBDIR}/debian/patches/00list
+echo "#! /bin/sh /usr/share/dpatch/dpatch-run" > 90_config.dpatch
+#echo "## 90_config.dpatch by James Vasile <james@jamesvasile.com>" >> 90_config.dpatch
 mkdir -p privoxy
 cp config privoxy
-diff -urNad ${DEBDIR}/config privoxy/config >> 1000_config.dpatch
-mv 1000_config.dpatch ${DEBDIR}/debian/patches
-echo 1000_config.dpatch >> ${DEBDIR}/debian/patches/00list
+diff -urNad ${DEBDIR}/config privoxy/config >> 90_config.dpatch
+mv 90_config.dpatch ${DEBDIR}/debian/patches
+echo 90_config.dpatch >> ${DEBDIR}/debian/patches/00list
+
+## Add action/filter files as patches
+cp default.action  match-all.action default.filter privoxy
+echo "#! /bin/sh /usr/share/dpatch/dpatch-run" > 91_default.action.dpatch
+diff -urNad ${DEBDIR}/default.action privoxy/default.action >> 91_default.action.dpatch
+mv 91_default.action.dpatch ${DEBDIR}/debian/patches
+echo 91_default.action.dpatch >> ${DEBDIR}/debian/patches/00list
+
+echo "#! /bin/sh /usr/share/dpatch/dpatch-run" > 92_default.filter.dpatch
+diff -urNad ${DEBDIR}/default.filter privoxy/default.filter >> 92_default.filter.dpatch
+mv 92_default.filter.dpatch ${DEBDIR}/debian/patches
+echo 92_default.filter.dpatch >> ${DEBDIR}/debian/patches/00list
+
+echo "#! /bin/sh /usr/share/dpatch/dpatch-run" > 93_match-all.action.dpatch
+diff -urNad ${DEBDIR}/match-all.action privoxy/match-all.action >> 93_match-all.action.dpatch
+mv 93_match-all.action.dpatch ${DEBDIR}/debian/patches
+echo 93_match-all.action.dpatch >> ${DEBDIR}/debian/patches/00list
 rm -rf privoxy
 
 # Update changelog
@@ -45,6 +62,12 @@ cp Debian/control ${DEBDIR}/debian/control
 cd ${DEBDIR}/debian
 sed -i -e"s/^\(DEBDIR.*\)privoxy/\1freedombox-privoxy/" rules 
 sed -i -e"s/\(cd.*DEBDIR.*\)privoxy/\1freedombox-privoxy/" rules
+sed -i -e"s/dh_installinit/dh_installinit --name=privoxy/" rules
+mv init.d freedombox-privoxy.privoxy.init
+#sed -i -e"s/\(cd.*DEBDIR.*\)privoxy/\1; ln -s freedombox-privoxy privoxy)\n\t(\1freedombox-privoxy/" rules
+
+## update dirs in doc-base
+sed -i -e"s/\/privoxy/\/freedombox-privoxy/" doc-base.*
 
 cd ..
 debuild -us -uc
