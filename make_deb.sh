@@ -84,6 +84,7 @@ add_patch default.filter
 add_patch easyprivacy.action
 add_patch easylist.action
 add_patch https_everywhere.action
+rm -rf privoxy
 
 update_changelog
 update_control
