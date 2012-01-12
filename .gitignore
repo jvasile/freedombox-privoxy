@@ -4,6 +4,7 @@ easyprivacy.action
 easyprivacy.txt
 https_everywhere.action
 vendor/https-everywhere
+vendor/git2changelog
 Debian/freedombox-privoxy*
 Debian/privoxy*
 *~
