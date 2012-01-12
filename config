@@ -369,8 +369,9 @@ logdir /var/log/privoxy
 #
 actionsfile match-all.action # Actions that are applied to all sites and maybe overruled later on.
 actionsfile default.action   # Main actions file
-actionsfile ssl.freedombox.action # https everywhere
+actionsfile https_everywhere.action
 #actionsfile easyprivacy.action
+#actionsfile easylist.action # probably quite buggy
 actionsfile user.action      # User customizations
 #
 #
