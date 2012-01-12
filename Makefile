@@ -45,4 +45,4 @@ install: all
 	/etc/init.d/privoxy restart
 
 clean:
-	@rm -rf easyprivacy.action easyprivacy.txt https_everywhere.action vendor/https-everywhere 1000_config.dpatch Debian/privoxy* Debian/freedombox-privoxy* easylist.action easylist.txt
+	@rm -rf easyprivacy.action easyprivacy.txt https_everywhere.action vendor/https-everywhere 1000_config.dpatch Debian/privoxy* Debian/freedombox-privoxy* easylist.action easylist.txt vendor/git2changelog
