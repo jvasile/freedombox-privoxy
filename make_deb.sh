@@ -35,11 +35,7 @@ update_control() {
 
 update_changelog() {
     echo Updating changelog
-    # Update changelog
-    echo -n "freedombox-" > changelog.debian
-    head -n 1 ${DEBDIR}/debian/changelog >> changelog.debian
-    echo -e "\n  * Add FreedomBox config to package" >> changelog.debian
-    echo -e "\n -- James Vasile <james@jamesvasile.com> " `date -R` "\n" >> changelog.debian
+    cp changelog changelog.debian
     cat ${DEBDIR}/debian/changelog >> changelog.debian
     mv changelog.debian ${DEBDIR}/debian/changelog
 }

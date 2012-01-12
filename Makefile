@@ -36,7 +36,7 @@ changelog: .git/objects vendor/git2changelog/git2changelog.py
 	@vendor/git2changelog/git2changelog.py > changelog
 
 deb: debian
-debian: easyprivacy.action https_everywhere.action easylist.action
+debian: easyprivacy.action https_everywhere.action easylist.action changelog
 	./make_deb.sh
 
 install: all
