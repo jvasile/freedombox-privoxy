@@ -33,6 +33,9 @@
 # http://sourceforge.net/mail/?group_id=11118. Archives are available
 # here too.
 #
+# This file deviates from the normal Debian version of this file.  It
+# has been modified for freedombox-privoxy.
+#
 #################################################################################
 #
 # Syntax:

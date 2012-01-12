@@ -5,6 +5,9 @@
 # may be overruled later on by other actions files. Less experienced
 # users should only edit this file through the actions file editor.
 #
+# This file deviates from the normal Debian version of this file.  It
+# has been modified for freedombox-privoxy.
+#
 #############################################################################
 { \
 +change-x-forwarded-for{block} \

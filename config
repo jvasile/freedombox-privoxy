@@ -367,10 +367,10 @@ logdir /var/log/privoxy
 #      was necessary to be consistent with the other file options and
 #      to allow previously forbidden characters.
 #
-actionsfile match-all.freedombox.action # Actions that are applied to all sites and maybe overruled later on.
-actionsfile default.freedombox.action   # Main actions file
-actionsfile https_everywhere.action # https everywhere
-actionsfile easyprivacy.action
+actionsfile match-all.action # Actions that are applied to all sites and maybe overruled later on.
+actionsfile default.action   # Main actions file
+actionsfile ssl.freedombox.action # https everywhere
+#actionsfile easyprivacy.action
 actionsfile user.action      # User customizations
 #
 #
@@ -415,7 +415,7 @@ actionsfile user.action      # User customizations
 #      It is recommended to place any locally adapted filters into a
 #      separate file, such as user.filter.
 #
-filterfile default.freedombox.filter
+filterfile default.filter
 filterfile user.filter      # User customizations
 #
 #

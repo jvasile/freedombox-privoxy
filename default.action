@@ -52,6 +52,9 @@
 # The current development version of this file is located:
 # http://ijbswa.cvs.sourceforge.net/*checkout*/ijbswa/current/default.action.master
 #
+# This file deviates from the normal Debian version of this file.  It
+# has been modified for freedombox-privoxy.
+#
 #############################################################################
 # Syntax
 #############################################################################
