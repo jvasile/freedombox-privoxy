@@ -31,11 +31,12 @@ vendor/git2changelog/git2changelog.py:
 	@rm -rf vendor/git2changelog
 	@cd vendor; git clone git@github.com:jvasile/git2changelog.git git2changelog
 
+# Note, this is the changelog for freedombox-privoxy, not for the debian package
 changelog: vendor/git2changelog/git2changelog.py
 	@vendor/git2changelog/git2changelog.py > changelog
 
 deb: debian
-debian:
+debian: easyprivacy.action https_everywhere.action easylist.action
 	./make_deb.sh
 
 install: all
