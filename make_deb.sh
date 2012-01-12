@@ -5,13 +5,18 @@ dir_setup() {
     ## Copy privoxy dir, set dir aliases and apply upstream dpatch patches
     PRIVDIR=`ls -d privoxy*| xargs | sed "s/ .*//"`
     FBOXDIR=freedombox-${PRIVDIR}
+
+    echo PRIVDIR = ${PRIVDIR}
+    echo FBOXDIR = ${FBOXDIR}
     rm -rf ${FBOXDIR}
     cp -r ${PRIVDIR} ${FBOXDIR}
     cp `ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz freedombox-`ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz
     cd ${FBOXDIR}
     dpatch apply-all
     cd ../..
-    DEBDIR=`ls -d Debian/freedombox-privoxy*| xargs | sed "s/ .*//"`
+    DEBDIR=`find Debian -maxdepth 1 -name "freedombox*" -type d`
+    #`ls -d Debian/freedombox-privoxy*| xargs | sed "s/ .*//"`
+    echo DEBDIR = ${DEBDIR}
 }
 
 add_patch() {
