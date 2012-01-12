@@ -3,13 +3,13 @@ VERSION=`cat VERSION`
 PACKAGE_NAME=freedombox-privoxy
 DEBDIR=`ls -d Debian/privoxy*| xargs | sed "s/ .*//"`
 
-all: easyprivacy.action easylist.action https_everywhere.action
+all: easyprivacy.action easylist.action https_everywhere.action changelog
 
 easyprivacy.txt:
 	@wget https://easylist-downloads.adblockplus.org/easyprivacy.txt
 
 easylist.txt:
-	@https://easylist-downloads.adblockplus.org/easylist.txt
+	@wget https://easylist-downloads.adblockplus.org/easylist.txt
 
 easyprivacy.action: easyprivacy.txt
 	@./abp_import.py easyprivacy.txt > easyprivacy.action
@@ -21,11 +21,18 @@ vendor:
 	@mkdir -p vendor
 
 vendor/https-everywhere:
+	@rm -rf vendor/https_everywhere
 	@cd vendor; git clone git://git.torproject.org/https-everywhere.git https-everywhere
 
 https_everywhere.action: vendor/https-everywhere
 	@./https_everywhere_import.py > https_everywhere.action
 
+vendor/git2changelog/git2changelog.py:
+	@rm -rf vendor/git2changelog
+	@cd vendor; git clone git@github.com:jvasile/git2changelog.git git2changelog
+
+changelog: vendor/git2changelog/git2changelog.py
+	@vendor/git2changelog/git2changelog.py > changelog
 
 deb: debian
 debian:
