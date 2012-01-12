@@ -8,8 +8,8 @@ James Vasile
 
 import sys
 
-easylist_url = "todo: put url here"
-easyprivacy_url = "todo: put url here"
+easylist_url = "https://easylist-downloads.adblockplus.org/easylist.txt"
+easyprivacy_url = "https://easylist-downloads.adblockplus.org/easyprivacy.txt"
 
 
 def out(*args):

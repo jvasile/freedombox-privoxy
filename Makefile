@@ -5,6 +5,12 @@ DEBDIR=`ls -d Debian/privoxy*| xargs | sed "s/ .*//"`
 
 all: easyprivacy.action easylist.action https_everywhere.action
 
+easyprivacy.txt:
+	@wget https://easylist-downloads.adblockplus.org/easyprivacy.txt
+
+easylist.txt:
+	@https://easylist-downloads.adblockplus.org/easylist.txt
+
 easyprivacy.action: easyprivacy.txt
 	@./abp_import.py easyprivacy.txt > easyprivacy.action
 
