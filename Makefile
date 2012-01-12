@@ -32,7 +32,7 @@ vendor/git2changelog/git2changelog.py:
 	@cd vendor; git clone git@github.com:jvasile/git2changelog.git git2changelog
 
 # Note, this is the changelog for freedombox-privoxy, not for the debian package
-changelog: vendor/git2changelog/git2changelog.py
+changelog: .git/objects vendor/git2changelog/git2changelog.py
 	@vendor/git2changelog/git2changelog.py > changelog
 
 deb: debian
