@@ -41,7 +41,7 @@ debian: easyprivacy.action https_everywhere.action easylist.action changelog
 
 install: all
 	mkdir -p $(INSTALL_DIR)
-	cp config default.freedombox.filter match-all.freedombox.action default.freedombox.action https_everywhere.action easyprivacy.action easylist.action $(INSTALL_DIR)
+	cp config default.filter match-all.action default.action https_everywhere.action easyprivacy.action easylist.action $(INSTALL_DIR)
 	/etc/init.d/privoxy restart
 
 clean:
