@@ -93,4 +93,5 @@ update_rules
 update_doc_base
 
 cd ${DEBDIR}
-debuild -us -uc
+
+debuild -kjames@jamesvasile.com # -us -uc
