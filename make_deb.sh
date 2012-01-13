@@ -85,8 +85,6 @@ add_patch default.filter
 add_patch easyprivacy.action
 add_patch easylist.action
 add_patch https_everywhere.action
-add_patch pcrs.c
-add_patch pcrs.h
 add_patch filters.c
 
 update_changelog
