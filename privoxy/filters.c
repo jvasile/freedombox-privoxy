@@ -1016,9 +1016,10 @@ pcrs_job *compile_dynamic_pcrs_job_list(const struct client_state *csp, const st
  *
  * Function    :  rewrite_url
  *
- * Description :  Rewrites a URL with a single pcrs command
- *                and returns the result if it differs from the
- *                original and isn't obviously invalid.
+ * Description :  Rewrites a URL with one or more pcrs commands and
+ *                returns the result if it differs from the original
+ *                and isn't obviously invalid.  Separate pcrs commands
+ *                with tabs.
  *
  * Parameters  :
  *          1  :  old_url = URL to rewrite.
@@ -1032,12 +1033,28 @@ pcrs_job *compile_dynamic_pcrs_job_list(const struct client_state *csp, const st
 char *rewrite_url(char *old_url, const char *pcrs_command)
 {
    char *new_url = NULL;
-   int hits;
+   int hits=0;
 
    assert(old_url);
    assert(pcrs_command);
 
-   new_url = pcrs_execute_multiple_command(old_url, pcrs_command, &hits);
+	char * pch;
+	int h=0;
+   pch = strtok(pcrs_command, "\t");
+	char *subject;
+	subject = old_url;
+	while (pch != NULL)
+	{
+ 	   new_url = pcrs_execute_single_command(subject, pch, &h);
+ 	   pch = strtok(NULL, "\t");
+		hits += h;
+
+		if (subject != old_url) 
+		{
+		  freez(subject);
+		}
+		subject = new_url;
+	}
 
    if (hits == 0)
    {
@@ -1069,7 +1086,6 @@ char *rewrite_url(char *old_url, const char *pcrs_command)
    }
 
    return new_url;
-
 }
 
 
