@@ -83,14 +83,18 @@ def translate_ruleset(xml):
     if not target:
         return
     
+    print "#", name.encode("UTF-8")
+    red_str = "{+redirect{"
     for element in root.iter("rule"):
-        print "#", name.encode("UTF-8")
-        print (r"{+redirect{s@%s@%s@}}" % (cleanup(name, element.attrib['from']),
-                                           cleanup(name, element.attrib['to'])
-                                           )).encode("UTF-8")
-        for t in target:
-            print t.encode("UTF-8")
-        print
+        red_str +=("s@%s@%s@" % (cleanup(name, element.attrib['from']),
+                                 cleanup(name, element.attrib['to']))
+                   +"\t"
+                   ).encode("UTF-8")
+    red_str = red_str.strip()
+    print"%s}}" % red_str
+    for t in target:
+        print t.encode("UTF-8")
+    print
 
 def main(rule_dir=rule_dir):
     for fname in os.listdir(rule_dir):
