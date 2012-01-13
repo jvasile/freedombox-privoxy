@@ -1,17 +1,101 @@
-  2012-01-09 James Vasile <james@hackervisions.org>
+freedombox-privoxy (3.0.19-1) unstable; urgency=low
 
- * config: listen to the world.  Can you hear me now?
+  * privoxy/filters.c: split action lines on tabs and do multiple
+    regexes for redirect
+  * https_everywhere_import.py: use tabs to do multiple regexes per
+    domain
+  * make_deb.sh, privoxy/pcrs.c, privoxy/pcrs.h: no need to edit
+    pcrs.c or pcrs.h.  We can do the multi regex in filters.c
+  * Makefile: generated rulesets should depend on the generating
+    scripts
+  * .gitignore: ignore object files
+  * privoxy/filters.c, privoxy/pcrs.c, privoxy/pcrs.h: allow multiple
+    regexes for redirects. This probably leaks memory, need to take a
+    second look at it.
+  * Makefile, make_deb.sh: build deb in Makefile, so make_deb.sh just
+    sets up the patched copy of upstream deb
+  * Debian/control, Makefile, config, default.action, default.filter,
+    make_deb.sh, match-all.action, privoxy/config,
+    privoxy/debian/control, privoxy/default.action,
+    privoxy/default.filter, privoxy/match-all.action: move edited
+    versions of orig files to privoxy subdir
 
- * .gitignore: ignore https-everywhere dir
+ -- James Vasile <james@jamesvasile.com>  Fri, 13 Jan 2012 18:08:09 -0500
 
- * https_everywhere_import.py: typo
+freedombox-privoxy (3.0.19-1) unstable; urgency=low
 
- * config: add in custom filters for freedombox ssl and privacy
+  * Makefile: replace upstream configs
+  * make_deb.sh: sign package
+  * config: enable easyprivacy
 
- * Makefile: add makefile
+ -- James Vasile <james@jamesvasile.com>  Thu, 12 Jan 2012 20:37:09 -0500
 
-  2012-01-05 James Vasile <james@hackervisions.org>
+freedombox-privoxy (3.0.19-1) unstable; urgency=low
 
- * https_everywhere_import.py: import scripts should be executable
+  * make_deb.sh: better dir handling
+  * Makefile, make_deb.sh: add our changelog to deb package
+  * Makefile: changelog depends on .git/objects so we update as needed
+  * make_deb.sh: cleanup privoxy dir
+  * Makefile: clean vendor/git2changelog
+  * make_deb.sh: refactor
+  * config: don't hide name of https_everywhere file
+  * .gitignore: ignore git2changelog
+  * Makefile: make_deb should depend on the action lists
+  * ChangeLog, Makefile, changelog: generate changelog
+  * Makefile, abp_import.py: put easy urls in script and Makefile
+  * make_deb.sh: rename init.d and edit doc-base
+  * Debian/control: improve description of package
+  * config, default.action, default.filter, default.freedombox.action,
+    default.freedombox.filter, match-all.action,
+    match-all.freedombox.action: use original config filenames
 
- * config: config to use our actions and filters
+ -- James Vasile <james@hackervisions.org>  Thu, 12 Jan 2012 08:35:23 -0500
+
+freedombox-privoxy (3.0.19-1) unstable; urgency=low
+
+  * Debian/control: mention https-everywhere and easyprivacy in
+    package description
+  * Makefile: make deb calls script. cleanup make clean
+  * Debian/control: warn user about firewall
+  * .gitignore: Ignore generated and dloaded Debian files
+  * COPYING: gplv3
+  * Debian/control: control file for freedombox's version of privoxy
+  * make_deb.sh: start to repackage privoxy as freedombox-privoxy
+
+ -- James Vasile <james@hackervisions.org>  Wed, 11 Jan 2012 12:35:13 -0500
+
+freedombox-privoxy (3.0.19-1) unstable; urgency=low
+
+  * config: do not log
+  * README: add README
+  * ChangeLog: add changelog
+  * config: listen to the world.  Can you hear me now?
+  * .gitignore: ignore https-everywhere dir
+  * .gitignore: initial commit
+  * https_everywhere_import.py: typo
+  * config: add in custom filters for freedombox ssl and privacy
+  * Makefile: add makefile
+
+ -- James Vasile <james@hackervisions.org>  Mon, 9 Jan 2012 12:41:01 -0500
+
+freedombox-privoxy (3.0.19-1) unstable; urgency=low
+
+  * https_everywhere_import.py: import scripts should be executable
+  * config: config to use our actions and filters
+
+ -- James Vasile <james@hackervisions.org>  Thu, 5 Jan 2012 18:38:30 -0500
+
+freedombox-privoxy (3.0.19-1) unstable; urgency=low
+
+  * VERSION: match version to privoxy
+
+ -- James Vasile <james@hackervisions.org>  Wed, 11 Jan 2012 14:12:04 -0500
+
+freedombox-privoxy (0.1.1) unstable; urgency=low
+
+  * abp_import.py, default.freedombox.action,
+    default.freedombox.filter, match-all.freedombox.action: initial
+    commit
+
+ -- James Vasile <james@hackervisions.org>  Thu, 5 Jan 2012 18:29:57 -0500
+
