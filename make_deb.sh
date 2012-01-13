@@ -1,6 +1,8 @@
 #!/bin/bash
-
 patchcount=90
+prepend() {
+    echo -e "$1"|cat - $2 > /tmp/out && mv /tmp/out $2
+}
 dir_setup() {
     ## Copy privoxy dir, set dir aliases and apply upstream dpatch patches
     PRIVDIR=`ls -d privoxy*| xargs | sed "s/ .*//"`
@@ -23,11 +25,9 @@ add_patch() {
     echo Adding patch $1
     mkdir -p privoxy
     sed -i -e's/${patchcount}_$1.dpatch//' ${DEBDIR}/debian/patches/00list
-    echo "#! /bin/sh /usr/share/dpatch/dpatch-run" > ${patchcount}_$1.dpatch
-    echo "## ${patchcount}_$1.dpatch by James Vasile <james@jamesvasile.com>" >> ${patchcount}_$1.dpatch
-    cp $1 privoxy
-    diff -urNad ${DEBDIR}/$1 privoxy/$1 >> ${patchcount}_$1.dpatch
-    mv ${patchcount}_$1.dpatch ${DEBDIR}/debian/patches
+    DEST=${DEBDIR}/debian/patches/${patchcount}_$1.dpatch
+    diff -urNad ${DEBDIR}/$1 privoxy/$1 > ${DEST}
+    prepend "#! /bin/sh /usr/share/dpatch/dpatch-run\n## ${patchcount}_$1.dpatch by James Vasile <james@jamesvasile.com>" ${DEST}
     echo ${patchcount}_$1.dpatch >> ${DEBDIR}/debian/patches/00list
     patchcount=`expr ${patchcount} + 1` 
 }
@@ -35,7 +35,7 @@ add_patch() {
 update_control() {
     echo Updating control
     ## update control file
-    cp Debian/control ${DEBDIR}/debian/control
+    cp privoxy/debian/control ${DEBDIR}/debian/control
 }
 
 update_changelog() {
@@ -85,13 +85,16 @@ add_patch default.filter
 add_patch easyprivacy.action
 add_patch easylist.action
 add_patch https_everywhere.action
-rm -rf privoxy
+add_patch pcrs.c
+add_patch pcrs.h
+add_patch filters.c
 
 update_changelog
 update_control
 update_rules
 update_doc_base
 
-cd ${DEBDIR}
+#cd Debian/${FBOXDIR}; dpatch apply-all
 
+cd ${DEBDIR}
 debuild -kjames@jamesvasile.com # -us -uc

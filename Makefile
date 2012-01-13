@@ -3,19 +3,19 @@ VERSION=`cat VERSION`
 PACKAGE_NAME=freedombox-privoxy
 DEBDIR=`ls -d Debian/privoxy*| xargs | sed "s/ .*//"`
 
-all: easyprivacy.action easylist.action https_everywhere.action changelog
+all: privoxy/easyprivacy.action privoxy/easylist.action privoxy/https_everywhere.action changelog
 
-easyprivacy.txt:
+privoxy/easyprivacy.txt:
 	@wget https://easylist-downloads.adblockplus.org/easyprivacy.txt
 
-easylist.txt:
+privoxy/easylist.txt:
 	@wget https://easylist-downloads.adblockplus.org/easylist.txt
 
-easyprivacy.action: easyprivacy.txt
-	@./abp_import.py easyprivacy.txt > easyprivacy.action
+privoxy/easyprivacy.action: easyprivacy.txt
+	@./abp_import.py easyprivacy.txt > privoxy/easyprivacy.action
 
-easylist.action: easylist.txt
-	@./abp_import.py easylist.txt > easylist.action
+privoxy/easylist.action: easylist.txt
+	@./abp_import.py easylist.txt > privoxy/easylist.action
 
 vendor:
 	@mkdir -p vendor
@@ -24,8 +24,8 @@ vendor/https-everywhere:
 	@rm -rf vendor/https_everywhere
 	@cd vendor; git clone git://git.torproject.org/https-everywhere.git https-everywhere
 
-https_everywhere.action: vendor/https-everywhere
-	@./https_everywhere_import.py > https_everywhere.action
+privoxy/https_everywhere.action: vendor/https-everywhere
+	@./https_everywhere_import.py > privoxy/https_everywhere.action
 
 vendor/git2changelog/git2changelog.py:
 	@rm -rf vendor/git2changelog
@@ -36,13 +36,14 @@ changelog: .git/objects vendor/git2changelog/git2changelog.py
 	@vendor/git2changelog/git2changelog.py > changelog
 
 deb: debian
-debian: easyprivacy.action https_everywhere.action easylist.action changelog
+debian: privoxy/easyprivacy.action privoxy/https_everywhere.action privoxy/easylist.action changelog
 	./make_deb.sh
 
 install: all
 	mkdir -p $(INSTALL_DIR)
-	cp config default.filter match-all.action default.action https_everywhere.action easyprivacy.action easylist.action $(INSTALL_DIR)
+	cd privoxy; cp config default.filter match-all.action default.action https_everywhere.action easyprivacy.action easylist.action $(INSTALL_DIR)
 	/etc/init.d/privoxy restart
 
 clean:
-	@rm -rf easyprivacy.action easyprivacy.txt https_everywhere.action vendor/https-everywhere 1000_config.dpatch Debian/privoxy* Debian/freedombox-privoxy* easylist.action easylist.txt vendor/git2changelog
+	@rm -rf  vendor/https-everywhere 1000_config.dpatch Debian/privoxy* Debian/freedombox-privoxy* vendor/git2changelog
+	@cd privoxy; rm -rf easyprivacy.action easyprivacy.txt https_everywhere.action easylist.action easylist.txt 
