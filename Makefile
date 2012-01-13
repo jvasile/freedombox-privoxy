@@ -38,6 +38,8 @@ changelog: .git/objects vendor/git2changelog/git2changelog.py
 deb: debian
 debian: privoxy/easyprivacy.action privoxy/https_everywhere.action privoxy/easylist.action changelog
 	./make_deb.sh
+	cd `find Debian -maxdepth 1 -name "freedombox*" -type d`; debuild -kjames@jamesvasile.com # -us -uc
+
 
 install: all
 	mkdir -p $(INSTALL_DIR)

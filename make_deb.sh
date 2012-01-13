@@ -94,7 +94,5 @@ update_control
 update_rules
 update_doc_base
 
-#cd Debian/${FBOXDIR}; dpatch apply-all
-
-cd ${DEBDIR}
-debuild -kjames@jamesvasile.com # -us -uc
+cd Debian/${FBOXDIR}; 
+dpatch apply-all
