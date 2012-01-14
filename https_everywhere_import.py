@@ -53,7 +53,9 @@ def cleanup(name, att):
     if name in custom and att in custom[name]:
         return custom[name][att]
     else:
-        return att.replace("#", r"\#")
+        for c in "#@":
+            att = att.replace(c, r"\%s" % c)
+        return att
 
 def translate_ruleset(xml):
     try:
