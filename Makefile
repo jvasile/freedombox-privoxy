@@ -11,10 +11,10 @@ privoxy/easyprivacy.txt:
 privoxy/easylist.txt:
 	@wget https://easylist-downloads.adblockplus.org/easylist.txt
 
-privoxy/easyprivacy.action: easyprivacy.txt abp_import.py
+privoxy/easyprivacy.action: privoxy/easyprivacy.txt abp_import.py
 	@./abp_import.py easyprivacy.txt > privoxy/easyprivacy.action
 
-privoxy/easylist.action: easylist.txt abp_import.py
+privoxy/easylist.action: privoxy/easylist.txt abp_import.py
 	@./abp_import.py easylist.txt > privoxy/easylist.action
 
 vendor:
