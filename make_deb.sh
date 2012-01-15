@@ -16,7 +16,7 @@ dir_setup() {
 
     rm -rf ${FBOXDIR}
     cp -r ${PRIVDIR} ${FBOXDIR}
-    cp `ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz freedombox-`ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz
+    cp `ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz freedombox-privoxy_`head -n 1 ${PRIVDIR}/debian/changelog | sed -e"s/.*(\([^)]*\)).*/\1/"`.orig.tar.gz
     cd ${FBOXDIR}
     dpatch apply-all
     cd ../..
