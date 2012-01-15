@@ -21,6 +21,7 @@ vendor:
 	@mkdir -p vendor
 
 vendor/https-everywhere:
+	@mkdir -p vendor
 	@rm -rf vendor/https_everywhere
 	@cd vendor; git clone git://git.torproject.org/https-everywhere.git https-everywhere
 
@@ -28,6 +29,7 @@ privoxy/https_everywhere.action: vendor/https-everywhere https_everywhere_import
 	@./https_everywhere_import.py > privoxy/https_everywhere.action
 
 vendor/git2changelog/git2changelog.py:
+	@mkdir -p vendor
 	@rm -rf vendor/git2changelog
 	@cd vendor; git clone git@github.com:jvasile/git2changelog.git git2changelog
 
