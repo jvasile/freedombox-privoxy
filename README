@@ -19,7 +19,7 @@ Or if you are on a Debian system:
      make deb
      sudo apt-get purge privoxy # yes, this is necessary the first time
      sudo dpkg -i Debian/*.deb
-     sudo services privoxy restart
+     sudo service privoxy restart
 
 If you want to see what I changed, look in
 Debian/freedombox-privacy*/debian/patches/9*.dpatch after doing the make
