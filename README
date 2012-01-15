@@ -1,31 +1,79 @@
 # freedombox-privoxy
 James Vasile <james@jamesvasile.com>
-Released under GPLv3 or later
 
-This is a (lightly) modified Privoxy and a set of config for it that
-prefers SSL and tries to limit privacy tracking as you use the web.  It
-is geared toward the FreedomBox environment.  In particular, it
-listens on all interfaces and assumes you are protecting yourself via
-iptables or some upstream firewall.
+Released under GPLv3 or later.  Modifications to Privoxy are copyright
+2012 James Vasile and are released under GNU General Public License,
+version 3 or later.
 
-James Vasile's modifications to Privoxy are copyright 2012 James
-Vasile and are released under GNU General Public License, version 3 or
-later.
+One thing many people seem to agree the FreedomBox should do is web
+filtering for privacy and ad-removal.  Toward that end, this is a first
+draft version of a privoxy package for FreedomBox.
 
-## Privoxy
+     make deb
+     sudo apt-get purge privoxy # yes, this is necessary the first time
+     sudo dpkg -i Debian/*.deb
+     sudo services privoxy restart
+
+If you want to see what I changed, look in
+Debian/freedombox-privacy*/debian/patches/9*.dpatch after doing the make
+deb.  I'll get some binary packages up for x86 and Dream Plug soon.
+
+This package differs from the standard Debian privoxy package in a few
+key ways.
+
+ * First (and most importantly) it doesn't just listen on localhost.  The
+plan is eventually to control access to it via iptables, so by default
+it listens to the world.  Be careful with that if your FreedomBox is
+reachable via public net.
+
+ * Second, I imported the https-everywhere ruleset as a privoxy action file
+and modified the privoxy binary to handle it.
+
+ * Third, I imported the easyprivacy ruleset from Ad-Block Plus as a
+privoxy action file.  Easyprivacy is not included in ABP and most users
+are unaware that they can add it in.  To me, that makes it a good
+candidate for inclusion here.
+
+ * Fourth, I *started* to pull in the easylist ruleset from ABP.  It is
+impossible to fully duplicate easylist with a proxy because the proxy
+lacks information the browser uses to make more nuanced decisions about
+what to block.  Scripted import of easylist might be buggy, and this
+needs more investigation.
+
+ * Fifth, I lowered the amount of filtering compared to the stock
+privoxy config (see the match-all.action file for details).  I did this
+because unlike a proxy running on your local machine, a proxy that
+clients don't control should be a bit more careful about breaking sites.
+I'm trying to get down to a level where we don't break anything and then
+seeing how we build up from there.
+
+If you are a privoxy user, please do give this package a test run and
+report any problems to:
+
+     https://github.com/jvasile/freedombox-privoxy/issues
+
+Further work will include writing a script to test all the
+https-everywhere rules and discard the ones that are broken.  
+As well as one to periodically check for new regexes.  Anybody
+who wants to contribute to writing that is welcome to jump on in!
+
+
+## Dependencies
+
+### Privoxy
 
 This package is based on privoxy, which is copyright (C) 2001 the
 SourceForge Privoxy team. http://www.privoxy.org/.  Privoxy is
 released under GNU General Public License, version 2 or later.
 
-## Internet Junkbuster
+### Internet Junkbuster
 
 Privoxy is in turn based on the Internet Junkbuster originally written
 by and copyright (C) 1997 Anonymous Coders and Junkbusters
 Corporation.  http://www.junkbusters.com The Internet Junkbuster was
 released under the GNU General Public License, version 2 or later.
 
-## https-everywhere
+### https-everywhere
 
 This package downloads https-everywhere, which is released under
 GNU General Public License version 2 or later and has the following copyright
@@ -37,7 +85,7 @@ Copyright © 2010 Mike Perry <mikeperry@fscked.org>
 Incorporating code from NoScript,
 Copyright © 2004-2007 Giorgio Maone <g.maone@informaction.com>
 
-## git2changelog
+### git2changelog
 
 This package downloads git2changelog, which is copyright 2012 James
 Vasile and released under GNU General Public License version 3 or
