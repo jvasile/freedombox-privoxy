@@ -9,6 +9,13 @@ One thing many people seem to agree the FreedomBox should do is web
 filtering for privacy and ad-removal.  Toward that end, this is a first
 draft version of a privoxy package for FreedomBox.
 
+To use, you can do the usual
+
+     make
+     sudo make install
+
+Or if you are on a Debian system:
+
      make deb
      sudo apt-get purge privoxy # yes, this is necessary the first time
      sudo dpkg -i Debian/*.deb
