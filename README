@@ -3,7 +3,7 @@ Copyright 2012 James Vasile <james@jamesvasile.com>
 Released under GPLv3 or later
 
 This is a (lightly) modified Privoxy and a set of config for it that
-prefers SSL and tries to lmit privacy tracking as you use the web.  It
+prefers SSL and tries to limit privacy tracking as you use the web.  It
 is geared toward the FreedomBox environment.  In particular, it
 listens on all interfaces and assumes you are protecting yourself via
 iptables or some upstream firewall.
