@@ -1,5 +1,5 @@
 freedombox-privoxy
-Copyright 2012 James Vasile <james@jamesvasile.com>
+James Vasile <james@jamesvasile.com>
 Released under GPLv3 or later
 
 This is a (lightly) modified Privoxy and a set of config for it that
@@ -8,8 +8,9 @@ is geared toward the FreedomBox environment.  In particular, it
 listens on all interfaces and assumes you are protecting yourself via
 iptables or some upstream firewall.
 
-James Vasile's modifications to Privoxy are released under GNU General
-Public License, version 3 or later.
+James Vasile's modifications to Privoxy are copyright 2012 James
+Vasile and are released under GNU General Public License, version 3 or
+later.
 
 This package is based on privoxy, which is copyright (C) 2001 the
 SourceForge Privoxy team. http://www.privoxy.org/.  Privoxy is
