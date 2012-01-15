@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Get version of deb we want to make
+version=`cat VERSION`
+
 patchcount=90
 prepend() {
     echo -e "$1"|cat - $2 > /tmp/out && mv /tmp/out $2
@@ -6,10 +10,10 @@ prepend() {
 dir_setup() {
     ## Copy privoxy dir, set dir aliases and apply upstream dpatch patches
     PRIVDIR=`ls -d privoxy*| xargs | sed "s/ .*//"`
-    FBOXDIR=freedombox-${PRIVDIR}
-
+    FBOXDIR=freedombox-privoxy-${version}
     echo PRIVDIR = ${PRIVDIR}
     echo FBOXDIR = ${FBOXDIR}
+
     rm -rf ${FBOXDIR}
     cp -r ${PRIVDIR} ${FBOXDIR}
     cp `ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz freedombox-`ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz
