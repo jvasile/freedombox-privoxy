@@ -1,4 +1,4 @@
-freedombox-privoxy
+# freedombox-privoxy
 James Vasile <james@jamesvasile.com>
 Released under GPLv3 or later
 
@@ -12,12 +12,33 @@ James Vasile's modifications to Privoxy are copyright 2012 James
 Vasile and are released under GNU General Public License, version 3 or
 later.
 
+## Privoxy
+
 This package is based on privoxy, which is copyright (C) 2001 the
 SourceForge Privoxy team. http://www.privoxy.org/.  Privoxy is
 released under GNU General Public License, version 2 or later.
+
+## Internet Junkbuster
 
 Privoxy is in turn based on the Internet Junkbuster originally written
 by and copyright (C) 1997 Anonymous Coders and Junkbusters
 Corporation.  http://www.junkbusters.com The Internet Junkbuster was
 released under the GNU General Public License, version 2 or later.
 
+## https-everywhere
+
+This package downloads https-everywhere, which is released under
+GNU General Public License version 2 or later and has the following copyright
+information:
+
+Copyright © 2010 Mike Perry <mikeperry@fscked.org>
+                 Peter Eckersley <pde@eff.org>
+
+Incorporating code from NoScript,
+Copyright © 2004-2007 Giorgio Maone <g.maone@informaction.com>
+
+## git2changelog
+
+This package downloads git2changelog, which is copyright 2012 James
+Vasile and released under GNU General Public License version 3 or
+later.
