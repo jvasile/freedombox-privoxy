@@ -1038,34 +1038,34 @@ char *rewrite_url(char *old_url, const char *pcrs_command)
    assert(old_url);
    assert(pcrs_command);
 
-	// Copy pcrs_command so we don't change it in the strtok_r
-	char *copy_command = malloc(strlen(pcrs_command) + 1);
-	if (copy_command==NULL)
+   // Copy pcrs_command so we don't change it in the strtok_r
+   char *copy_command = malloc(strlen(pcrs_command) + 1);
+   if (copy_command==NULL)
    {
-	   log_error(LOG_LEVEL_ERROR, "Couldn't allocate memory to test for redirect.");
-	   return old_url;
+      log_error(LOG_LEVEL_ERROR, "Couldn't allocate memory to test for redirect.");
+      return old_url;
    }
-	strcpy(copy_command, pcrs_command);
+   strcpy(copy_command, pcrs_command);
 
-	char *saveptr;
-	char * pch;
-	int h=0;
+   char *saveptr;
+   char * pch;
+   int h=0;
    pch = strtok_r(copy_command, "\t", &saveptr);
-	char *subject;
-	subject = old_url;
-	while (pch != NULL)
-	{
-	   new_url = pcrs_execute_single_command(subject, pch, &h);
-		pch = strtok_r(NULL, "\t", &saveptr);
-		hits += h;
+   char *subject;
+   subject = old_url;
+   while (pch != NULL)
+   {
+      new_url = pcrs_execute_single_command(subject, pch, &h);
+      pch = strtok_r(NULL, "\t", &saveptr);
+      hits += h;
 
-		if (subject != old_url) 
-		{
-		  freez(subject);
-		}
-		subject = new_url;
-	}
-	freez(copy_command);
+      if (subject != old_url) 
+      {
+         freez(subject);
+      }
+      subject = new_url;
+   }
+   freez(copy_command);
 
    if (hits == 0)
    {
@@ -1097,6 +1097,7 @@ char *rewrite_url(char *old_url, const char *pcrs_command)
    }
 
    return new_url;
+
 }
 
 
