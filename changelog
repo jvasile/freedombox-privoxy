@@ -1,5 +1,22 @@
 freedombox-privoxy (3.0.19-1-1) unstable; urgency=low
 
+  * privoxy/filters.c: fix whitespace
+  * privoxy/filters.c: rewrite_url should be threadsafe and not
+    clobber pcrs_command
+
+ -- James Vasile <james@jamesvasile.com>  Mon, 16 Jan 2012 21:26:20 -0500
+
+freedombox-privoxy (3.0.19-1-1) unstable; urgency=low
+
+  * README: typo.  Thanks to Jonas Smedegaard for pointing it out.
+  * README: mention make install
+  * README: more comprehensive readme
+
+ -- James Vasile <james@jamesvasile.com>  Sun, 15 Jan 2012 13:04:14 -0500
+
+freedombox-privoxy (3.0.19-1-1) unstable; urgency=low
+
+  * changelog: update changelog
   * README: update readme w/ https everywhere and git2changelog (c)
     info
   * make_deb.sh: version fiddling to satisfy debuild
