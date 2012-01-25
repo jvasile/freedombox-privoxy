@@ -1,3 +1,18 @@
+freedombox-privoxy (3.0.19-1-3) unstable; urgency=low
+
+  * VERSION: bump version
+  * README, privoxy/debian/control: Improve docs and depend on
+    beautifulsoup.  Thanks to Ale London for the bug report.
+
+ -- James Vasile <james@jamesvasile.com>  Wed, 25 Jan 2012 10:34:57 -0500
+
+freedombox-privoxy (3.0.19-1-2) unstable; urgency=low
+
+  * VERSION: version bump
+  * changelog: update changelog
+
+ -- James Vasile <james@jamesvasile.com>  Wed, 18 Jan 2012 17:15:31 -0500
+
 freedombox-privoxy (3.0.19-1-1) unstable; urgency=low
 
   * privoxy/filters.c: fix whitespace
