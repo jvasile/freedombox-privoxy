@@ -11,11 +11,13 @@ draft version of a privoxy package for FreedomBox.
 
 To use, you can do the usual
 
+     cd freedombox-privoxy
      make
      sudo make install
 
 Or if you are on a Debian system:
 
+     cd freedombox-privoxy
      make deb
      sudo apt-get purge privoxy # yes, this is necessary the first time
      sudo dpkg -i Debian/*.deb
