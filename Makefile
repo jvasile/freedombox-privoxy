@@ -31,7 +31,7 @@ privoxy/https_everywhere.action: vendor/https-everywhere https_everywhere_import
 vendor/git2changelog/git2changelog.py:
 	@mkdir -p vendor
 	@rm -rf vendor/git2changelog
-	@cd vendor; git clone git@github.com:jvasile/git2changelog.git git2changelog
+	@cd vendor; git clone git://github.com/jvasile/git2changelog.git git2changelog
 
 # Note, this is the changelog for freedombox-privoxy, not for the debian package
 changelog: .git/objects vendor/git2changelog/git2changelog.py
