@@ -1,5 +1,30 @@
+freedombox-privoxy (3.0.19-1-5) unstable; urgency=low
+
+  * VERSION: VERSION
+  * make_deb.sh: nudge user about deb-src line.
+  * README: note the need to build deps in README
+
+ -- James Vasile <james@jamesvasile.com>  Mon, 30 Jan 2012 13:43:59 -0500
+
+freedombox-privoxy (3.0.19-1-4) unstable; urgency=low
+
+  * make_deb.sh: add a bit of debug
+
+ -- James Vasile <james@jamesvasile.com>  Sun, 29 Jan 2012 20:51:44 -0500
+
+freedombox-privoxy (3.0.19-1-4) unstable; urgency=low
+
+  * privoxy/debian/control: depend on python-lxml.  Thanks to Ale
+    London.
+  * VERSION: bump version
+  * Makefile: use read-only address for git2changelog
+
+ -- James Vasile <james@jamesvasile.com>  Sat, 28 Jan 2012 17:23:29 -0500
+
 freedombox-privoxy (3.0.19-1-3) unstable; urgency=low
 
+  * privoxy/debian/control: depend on beautifulsoup
+  * changelog: update changelog
   * VERSION: bump version
   * README, privoxy/debian/control: Improve docs and depend on
     beautifulsoup.  Thanks to Ale London for the bug report.
