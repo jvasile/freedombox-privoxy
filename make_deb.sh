@@ -16,7 +16,7 @@ dir_setup() {
 
     if [ -z ${PRIVDIR} ]; then
 	pwd
-	echo PRIVDIR is blank!
+	echo PRIVDIR is blank!  Do you have a valid deb-src line in /etc/apt/sources?
 	exit
     fi
 
