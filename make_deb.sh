@@ -14,6 +14,18 @@ dir_setup() {
     echo PRIVDIR = ${PRIVDIR}
     echo FBOXDIR = ${FBOXDIR}
 
+    if [ -z ${PRIVDIR} ]; then
+	pwd
+	echo PRIVDIR is blank!
+	exit
+    fi
+
+    if [ -z ${FBOXDIR} ]; then
+	pwd
+	echo FBOXDIR is blank!
+	exit
+    fi
+
     rm -rf ${FBOXDIR}
     cp -r ${PRIVDIR} ${FBOXDIR}
     cp `ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz freedombox-privoxy_`head -n 1 ${PRIVDIR}/debian/changelog | sed -e"s/.*(\([^)]*\)).*/\1/"`.orig.tar.gz
