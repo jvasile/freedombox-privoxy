@@ -59,6 +59,7 @@ def cleanup(name, att):
 
 def translate_ruleset(xml):
     try:
+        xml = xml.replace("rule from host", "rule from")
         root = etree.XML(xml)
     except:
         print xml
@@ -71,7 +72,9 @@ def translate_ruleset(xml):
             elif k == 'name':
                 name = element.attrib[k]
             elif k == "match_rule":
-                print "Warning: match_rule attribute encountered"
+                sys.stderr.write("Warning: match_rule attribute encountered\n")
+            elif k == "platform":
+                sys.stderr.write("Warning: platform rule encountered\n")
             else:
                 raise UnknownRulesetAttribute, [xml, element, k]
 
