@@ -22,6 +22,7 @@ vendor:
 
 vendor/https-everywhere-release:
 	@mkdir -p vendor/https-everywhere-release
+	@rm -rf vendor/https_everywhere-release
 	@cd vendor/https-everywhere-release; wget https://www.eff.org/files/https-everywhere-2.1.xpi
 	@cd vendor/https-everywhere-release; unzip https-everywhere-2.1.xpi
 
@@ -30,7 +31,7 @@ vendor/https-everywhere:
 	@rm -rf vendor/https_everywhere
 	@cd vendor; git clone git://git.torproject.org/https-everywhere.git https-everywhere
 
-privoxy/https_everywhere.action: vendor/https-everywhere https_everywhere_import.py
+privoxy/https_everywhere.action: vendor/https-everywhere-release https_everywhere_import.py
 	@./https_everywhere_import.py > privoxy/https_everywhere.action
 
 vendor/git2changelog/git2changelog.py:

@@ -12,9 +12,12 @@ Copyright 2012 James Vasile
 Released under GPLv3 or later
 """
 
-rule_dir = "vendor/https-everywhere/src/chrome/content/rules"
-
 import os, sys
+
+rule_dir = "vendor/https-everywhere-release/chrome/content/rules"
+if not os.path.exists(rule_dir):
+    rule_dir = "vendor/https-everywhere/src/chrome/content/rules"
+
 from BeautifulSoup import BeautifulSoup
 from lxml import etree
 
@@ -58,6 +61,43 @@ def cleanup(name, att):
         return att
 
 def translate_ruleset(xml):
+    def do_rule(element):
+        for k in element.attrib.keys():
+            if k == 'default_off':
+                return
+            elif k == 'name':
+                name = element.attrib[k]
+            elif k == "match_rule":
+                sys.stderr.write("Warning: match_rule attribute encountered in %s\n" % name)
+            elif k == "platform":
+                sys.stderr.write("Warning: platform rule encountered in %s\n" % name)
+            else:
+                raise UnknownRulesetAttribute, [xml, element, k]
+
+        target = []
+        for element in element.iter("target"):
+            if not 'default_off' in element.attrib:
+                target.append(element.attrib['host'])
+            for k in element.attrib.keys():
+                if k != 'host' and k != 'default_off':
+                    raise UnknownTargetAttribute, element
+        if not target:
+            sys.stderr.write("Warning: no target for %s\n" % name)
+            return
+    
+        print "#", name.encode("UTF-8")
+        red_str = "{+redirect{"
+        for element in element.iter("rule"):
+            red_str +=("s@%s@%s@" % (cleanup(name, element.attrib['from']),
+                                     cleanup(name, element.attrib['to']))
+                       +"\t"
+                       ).encode("UTF-8")
+        red_str = red_str.strip()
+        print"%s}}" % red_str
+        for t in target:
+            print t.encode("UTF-8")
+        print
+
     try:
         xml = xml.replace("rule from host", "rule from")
         root = etree.XML(xml)
@@ -65,47 +105,24 @@ def translate_ruleset(xml):
         print xml
         raise
 
-    for element in root.iter("ruleset"):
-        for k in element.attrib.keys():
-            if k == 'default_off':
-                return
-            elif k == 'name':
-                name = element.attrib[k]
-            elif k == "match_rule":
-                sys.stderr.write("Warning: match_rule attribute encountered\n")
-            elif k == "platform":
-                sys.stderr.write("Warning: platform rule encountered\n")
-            else:
-                raise UnknownRulesetAttribute, [xml, element, k]
-
-    target = []
-    for element in root.iter("target"):
-        if not 'default_off' in element.attrib:
-            target.append(element.attrib['host'])
-        for k in element.attrib.keys():
-            if k != 'host' and k != 'default_off':
-                raise UnknownTargetAttribute, element
-    if not target:
+    for element in root.iter("rulesetlibrary"):
+        for elem in element.iter("ruleset"):
+            do_rule(elem)
         return
-    
-    print "#", name.encode("UTF-8")
-    red_str = "{+redirect{"
-    for element in root.iter("rule"):
-        red_str +=("s@%s@%s@" % (cleanup(name, element.attrib['from']),
-                                 cleanup(name, element.attrib['to']))
-                   +"\t"
-                   ).encode("UTF-8")
-    red_str = red_str.strip()
-    print"%s}}" % red_str
-    for t in target:
-        print t.encode("UTF-8")
-    print
+
+    for element in root.iter("ruleset"):
+        do_rule(element)
 
 def main(rule_dir=rule_dir):
-    for fname in os.listdir(rule_dir):
-        if fname.endswith('.xml'):
-            with open(os.path.join(rule_dir, fname), 'r') as INF:
-                translate_ruleset(INF.read())
+    default_ruleset = os.path.join(rule_dir, "default.rulesets")
+    if os.path.exists(default_ruleset):
+        with open(default_ruleset, 'r') as INF:
+            translate_ruleset(INF.read())
+    else:
+        for fname in os.listdir(rule_dir):
+            if fname.endswith('.xml'):
+                with open(os.path.join(rule_dir, fname), 'r') as INF:
+                    translate_ruleset(INF.read())
 
 
 if __name__ == "__main__":
