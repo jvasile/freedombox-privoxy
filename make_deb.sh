@@ -42,11 +42,11 @@ dir_setup() {
 add_patch() {
     echo Adding patch $1
     mkdir -p privoxy
-    sed -i -e's/${patchcount}_$1.dpatch//' ${DEBDIR}/debian/patches/00list
+    sed -i -e's/${patchcount}_$1.dpatch//' ${DEBDIR}/debian/patches/series
     DEST=${DEBDIR}/debian/patches/${patchcount}_$1.dpatch
     diff -urNad ${DEBDIR}/$1 privoxy/$1 > ${DEST}
     prepend "#! /bin/sh /usr/share/dpatch/dpatch-run\n## ${patchcount}_$1.dpatch by James Vasile <james@jamesvasile.com>" ${DEST}
-    echo ${patchcount}_$1.dpatch >> ${DEBDIR}/debian/patches/00list
+    echo ${patchcount}_$1.dpatch >> ${DEBDIR}/debian/patches/series
     patchcount=`expr ${patchcount} + 1` 
 }
 
