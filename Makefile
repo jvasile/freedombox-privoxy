@@ -20,6 +20,11 @@ privoxy/easylist.action: easylist.txt abp_import.py
 vendor:
 	@mkdir -p vendor
 
+vendor/https-everywhere-release:
+	@mkdir -p vendor/https-everywhere-release
+	@cd vendor/https-everywhere-release; wget https://www.eff.org/files/https-everywhere-2.1.xpi
+	@cd vendor/https-everywhere-release; unzip https-everywhere-2.1.xpi
+
 vendor/https-everywhere:
 	@mkdir -p vendor
 	@rm -rf vendor/https_everywhere
