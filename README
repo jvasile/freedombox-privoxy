@@ -19,7 +19,7 @@ Or if you are on a Debian system:
 
      cd freedombox-privoxy
      sudo apt-get build-dep privoxy
-     sudo apt-get install logrotate
+     sudo apt-get install logrotate docbook-website
      make deb
      sudo apt-get purge privoxy # yes, this is necessary the first time
      sudo dpkg -i Debian/*.deb
