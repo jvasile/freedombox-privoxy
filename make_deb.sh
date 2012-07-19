@@ -28,7 +28,9 @@ dir_setup() {
 
     rm -rf ${FBOXDIR}
     cp -r ${PRIVDIR} ${FBOXDIR}
-    cp `ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz freedombox-privoxy_`head -n 1 ${PRIVDIR}/debian/changelog | sed -e"s/.*(\([^)]*\)).*/\1/"`.orig.tar.gz
+    ORIG=`ls -d privoxy*| xargs | sed -e"s/ .*//" -e "s/-/_/"`.orig.tar.gz
+    FBOXORIG=freedombox-privoxy_`head -n 1 ${PRIVDIR}/debian/changelog | sed -e"s/.*(\([^)]*\)).*/\1/"`.orig.tar.gz
+    cp ${ORIG} ${FBOXORIG}
     cd ${FBOXDIR}
     dpatch apply-all
     cd ../..
@@ -91,9 +93,7 @@ cd Debian
 ## Install source package
 apt-get source privoxy
 echo You might need to \"apt-get build-dep privoxy\" as root
-
 dir_setup
-
 add_patch config
 add_patch match-all.action
 add_patch default.action

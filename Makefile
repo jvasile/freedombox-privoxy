@@ -35,7 +35,7 @@ vendor/git2changelog/git2changelog.py:
 
 # Note, this is the changelog for freedombox-privoxy, not for the debian package
 changelog: .git/objects vendor/git2changelog/git2changelog.py
-	@vendor/git2changelog/git2changelog.py > changelog
+	@vendor/git2changelog/git2changelog.py freedombox-privoxy > changelog
 
 deb: debian
 debian: privoxy/easyprivacy.action privoxy/https_everywhere.action privoxy/easylist.action changelog
