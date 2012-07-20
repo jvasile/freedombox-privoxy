@@ -17,6 +17,7 @@ import os, sys
 rule_dir = "vendor/https-everywhere-release/chrome/content/rules"
 if not os.path.exists(rule_dir):
     rule_dir = "vendor/https-everywhere/src/chrome/content/rules"
+#rule_dir = "vendor/https-everywhere/src/chrome/content/rules"
 
 from BeautifulSoup import BeautifulSoup
 from lxml import etree
@@ -75,21 +76,21 @@ def translate_ruleset(xml):
                 raise UnknownRulesetAttribute, [xml, element, k]
 
         target = []
-        for element in element.iter("target"):
-            if not 'default_off' in element.attrib:
-                target.append(element.attrib['host'])
-            for k in element.attrib.keys():
+        for target_element in element.iter("target"):
+            if not 'default_off' in target_element.attrib:
+                target.append(target_element.attrib['host'])
+            for k in target_element.attrib.keys():
                 if k != 'host' and k != 'default_off':
-                    raise UnknownTargetAttribute, element
+                    raise UnknownTargetAttribute, target_element
         if not target:
             sys.stderr.write("Warning: no target for %s\n" % name)
             return
     
         print "#", name.encode("UTF-8")
         red_str = "{+redirect{"
-        for element in element.iter("rule"):
-            red_str +=("s@%s@%s@" % (cleanup(name, element.attrib['from']),
-                                     cleanup(name, element.attrib['to']))
+        for rule_element in element.iter("rule"):
+            red_str +=("s@%s@%s@" % (cleanup(name, rule_element.attrib['from']),
+                                     cleanup(name, rule_element.attrib['to']))
                        +"\t"
                        ).encode("UTF-8")
         red_str = red_str.strip()
