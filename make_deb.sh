@@ -110,3 +110,5 @@ update_doc_base
 
 cd Debian/${FBOXDIR}; 
 dpatch apply-all
+
+cp ../${PRIVDIR}/debian/init.d debian/init.d
