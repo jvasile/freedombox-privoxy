@@ -51,7 +51,7 @@ def translate(line):
     elif line.startswith("@@"):
         unblock.append(line[2:])
     elif '$' in line:
-        pat, opts = line.split("$",2) 
+        pat, opts = line.rsplit("$",1)
         opts = opts.split(',')
         for opt in opts:
             if opt in "third-party|~third-party|script|image":
